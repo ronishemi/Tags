@@ -45,6 +45,7 @@ public class Tags extends Activity implements OnTouchListener {
 	private RelativeLayout myLayout;
 	private ArrayList<Pinpoint> arrPoints = new ArrayList<Pinpoint>();
 	private boolean exist;
+	private boolean changed;
 	private Boolean firstTime;
 	private SharedPreferences sharedPref;
 	private InputMethodManager imm;
@@ -91,6 +92,7 @@ public class Tags extends Activity implements OnTouchListener {
 			@Override
 			public void onClick(View v) {
 				done();
+				
 			}
 		});
 		editText.setOnEditorActionListener(new OnEditorActionListener() {
@@ -115,7 +117,7 @@ public class Tags extends Activity implements OnTouchListener {
 				// TODO Auto-generated method stub
 
 				newpoint = getPinpoint();
-				if (newpoint != null) {
+				if ((newpoint != null)&&(changed==false)) {
 					Toast.makeText(getApplicationContext(), newpoint.getText(),
 							Toast.LENGTH_SHORT).show();
 					button.setText("cancel");
@@ -135,13 +137,14 @@ public class Tags extends Activity implements OnTouchListener {
 			@Override
 			public boolean onLongClick(View v) {
 				// TODO Auto-generated method stub
-				if (!editText.isEnabled())
+				if (!editText.isEnabled()||(changed ==true))
 					return true;
 				editText.bringToFront();
 				button.bringToFront();
 				newpoint = getPinpoint();
 				
 				if (newpoint == null) {
+					
 					pinpoint = new Pinpoint(XposiTion, YposiTion, "stamText",true);
 					exist = false;
 					myView.addPinpoint(pinpoint);
@@ -149,6 +152,7 @@ public class Tags extends Activity implements OnTouchListener {
 					exist = true;
 					editText.setText(newpoint.getText());
 				}
+				changed=true;
 				return true;
 			}
 
@@ -255,5 +259,6 @@ public class Tags extends Activity implements OnTouchListener {
 			myView.bringToFront();
 		}
 		imm.hideSoftInputFromWindow(button.getWindowToken(), 0);
+		changed=false;
 	}
 }
