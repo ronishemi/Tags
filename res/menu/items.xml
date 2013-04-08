@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/qrcode"
+        android:title="@string/qrcode"
+        android:icon="@drawable/qrcode"
+        android:showAsAction="ifRoom|withText"
+    />
+     <item
+        android:id="@+id/cancel"
+        android:title="@string/cancel"
+        android:icon="@drawable/cancel"
+        android:showAsAction="ifRoom|withText"
+    />
+     <item
+        android:id="@+id/like"
+        android:title="@string/like"
+        android:icon="@drawable/like_button"
+        android:showAsAction="ifRoom|withText"
+    />
+ 
+</menu>

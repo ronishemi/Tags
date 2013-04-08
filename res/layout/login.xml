@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_box"
+    android:orientation="vertical" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left" >
+
+        <ImageButton
+            android:id="@+id/exitbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/exitbtn" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/textshape"
+            android:ems="20"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:hint="@string/username" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/textshape"
+            android:ems="20"
+            android:hint="@string/Password"
+            android:inputType="textPassword"
+            android:padding="5dp">
+
+            <requestFocus />
+        </EditText>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/loginbtn"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/myshape"
+            android:text="@string/Login" />
+    </TableRow>
+   
+ <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+    <TextView
+         android:id="@+id/textview"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:ems="20"
+            android:textColor="#fefefe"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/don_t_have_an_account_yet_" /> 
+        </TableRow>
+        
+    <TableRow
+        android:id="@+id/tableRow7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageButton
+            android:id="@+id/signup"
+            android:clickable="true"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/button_selector" />
+    </TableRow>
+
+</LinearLayout>
