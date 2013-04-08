@@ -76,7 +76,7 @@ public class MyView extends View {
 		
 	}
 	public void inValid(){
-		invalidate();
+		invalidate();				
 	}
 	//Add new point
 	public void addPinpoint(Pinpoint pinpoint) {
@@ -157,7 +157,7 @@ public class MyView extends View {
 		public void onFinish() {
 			// TODO Auto-generated method stub
 			changeColor=-1;			
-			
+			invalidate();
 		}
 
 		@Override

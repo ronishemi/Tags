@@ -321,7 +321,7 @@ public class QRMap extends Activity implements OnTouchListener {
 					KeyEvent event) {
 				// TODO Auto-generated method stub
 					if(Constants.inOperation){
-						myView.inValid();
+						
 						return false;
 					}
 				if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -340,7 +340,7 @@ public class QRMap extends Activity implements OnTouchListener {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(Constants.inOperation||Constants.inDelOperation){
-					myView.inValid();
+					
 					return ;
 				}
 				Constants.inOperation = true;	
