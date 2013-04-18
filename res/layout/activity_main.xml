@@ -1,35 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>  
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/delbtn"
-        android:layout_toLeftOf="@+id/delbtn"
-        android:ems="10"
-        android:inputType="textPostalAddress" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/delbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/btn"
-        android:text="@string/delete" />
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/save" />
-
-</RelativeLayout>
+    tools:context=".MainActivity"
+    android:id="@+id/framelayout">    
+    <ImageView  
+        android:id="@+id/frameImage"  
+        android:layout_height="fill_parent"  
+        android:layout_width="fill_parent"  
+        android:background="@drawable/shenkar" 
+        android:adjustViewBounds="true"
+        >          
+     </ImageView>       
+    
+</FrameLayout>
