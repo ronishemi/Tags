@@ -25,8 +25,8 @@ public class MyView extends View {
 	public float maxH;
 	public Integer changeColor = -1;
 	public Integer orientation;
-	
-	
+	private int state;
+	private MyCount counter;
 	//Draw pinpoint and map
 	public MyView(Context context) {
 		super(context);
@@ -76,7 +76,11 @@ public class MyView extends View {
 		
 	}
 	public void inValid(){
-		invalidate();				
+		if(state == 0){
+		invalidate();
+		counter = new MyCount(150, 10); // set your seconds
+		   counter.start();
+		}
 	}
 	//Add new point
 	public void addPinpoint(Pinpoint pinpoint) {
@@ -93,11 +97,12 @@ public class MyView extends View {
 	public void delLastPinpoint() {
 		points.remove(points.size()-1);
 	}
-	public void changeColor(int index){	
-		System.out.println(points.size());
+	public void changeColor(int index){			
+		state =1;
 		changeColor=index;
-		MyCount counter = new MyCount(5000, 1000); // set your seconds
+		counter = new MyCount(5000, 10); // set your seconds
 		   counter.start();
+		   
 	}
 	/**
 	 * This method convents dp unit to equivalent device specific value in
@@ -139,6 +144,7 @@ public class MyView extends View {
 	public void onWindowFocusChanged(boolean hasWindowFocus) {
 		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasWindowFocus);
+			this.invalidate();
 //		 int intrinsicHeight = mCustomImage.getIntrinsicHeight();
 //		    int intrinsicWidth = mCustomImage.getIntrinsicWidth();
 		   
@@ -156,14 +162,17 @@ public class MyView extends View {
 		@Override
 		public void onFinish() {
 			// TODO Auto-generated method stub
-			changeColor=-1;			
-			invalidate();
+				if(state == 1){	
+					changeColor=-1;
+					state=0;
+				}
+				invalidate();			
 		}
 
 		@Override
 		public void onTick(long arg0) {
 			// TODO Auto-generated method stub
-			
+			invalidate();
 		}//MyCount  
 
 	}

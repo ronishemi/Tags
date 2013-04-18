@@ -309,9 +309,8 @@ public class QRMap extends Activity implements OnTouchListener {
 				return;
 			}
 				delbtn.setText("Delete");
-				myView.inValid();
 				doneSave();
-				
+				myView.inValid();
 			}
 		});
 		editText.setOnEditorActionListener(new OnEditorActionListener() {
@@ -413,11 +412,12 @@ public class QRMap extends Activity implements OnTouchListener {
 		myView.setOnTouchListener(this);
 		if(!Constants.isOnline())
 		  paintOnCanvas();
-		myView.inValid();
+		
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.items, menu);
+        myView.inValid();
         return super.onCreateOptionsMenu(menu);
     }
  
@@ -439,6 +439,7 @@ public class QRMap extends Activity implements OnTouchListener {
                 break;    
  
         }
+        myView.inValid();
         return true;
  
     }
@@ -468,10 +469,10 @@ public class QRMap extends Activity implements OnTouchListener {
 						Constants.QRid = Integer.parseInt(splitResult[1]);
 						 int i = dB.getQRPosition(Constants.QRid);
 						 Toast.makeText(this, "Missing Network Connection", Toast.LENGTH_SHORT).show();
-						 if(i != -1){
+						 if(i != -1)
 							myView.changeColor(i);
-							myView.inValid();
-						 }
+						 myView.inValid();	
+						 
 						 return;					
 						
 					}
@@ -525,6 +526,8 @@ public class QRMap extends Activity implements OnTouchListener {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
+		if(myView != null)
+			myView.inValid();
 		sharedPref.edit().putBoolean("notfirstTime", true).commit();
 		
 	}
@@ -634,9 +637,10 @@ public class QRMap extends Activity implements OnTouchListener {
 
 			}
 			myView.bringToFront();
-		}
+		}		
 		imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 		changed = false;
+		
 	}
 	
 
@@ -659,8 +663,9 @@ public class QRMap extends Activity implements OnTouchListener {
 					pinpoint.getParseId());
 
 			myView.addPinpoint(pin);
-			myView.inValid();
+			
 		}
+		myView.inValid();
 		Constants.inOperation = false;
 	}
 	
