@@ -115,13 +115,16 @@ public class SingelDB {
 				}
 			Constants.inOperation = false;	
 			if(pinpoint != null){
-				//System.out.println("The ADD method "+array.size());
+				if(!Constants.endInserting)
+				 QRMap.myView.addPinpoint(Constants.pinpoint);
+				Constants.endInserting = true;
+				QRMap.myView.inValid();
 				return SingelDB.array.add(pinpoint);
 			}
+			QRMap.myView.inValid();
 			return false;
 		}
-
-		
+			
 		
 		
 		// Add to List from parse
@@ -184,6 +187,7 @@ public class SingelDB {
 			      // object will be your object
 			    //	System.out.println("found object");
 			    	delList(position);
+			    	
 			    } else {
 			      // something went wrong
 			    	System.out.println(e.getMessage());

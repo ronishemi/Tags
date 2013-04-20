@@ -65,7 +65,7 @@ public class QRMap extends Activity implements OnTouchListener {
 	private java.util.Date date;
 	private final Handler _handler = new Handler();
 	private static int DATA_INTERVAL = 10*1000;
-
+	
 	private IntentIntegrator integrator;
 	private String	result;
 	// private InputMethodManager imm;
@@ -104,8 +104,8 @@ public class QRMap extends Activity implements OnTouchListener {
 					// application is running
 					if(showFlag)
 					    showMap();
-				//	dB.test();
 					paintOnCanvas();
+					
 				}
 			}
 		}else{
@@ -308,9 +308,12 @@ public class QRMap extends Activity implements OnTouchListener {
 				myView.inValid();	
 				return;
 			}
-				delbtn.setText("Delete");
-				doneSave();
-				myView.inValid();
+			String text = editText.getText().toString();
+			if (text != null && text.trim().length() > 0) {	
+			delbtn.setText("Delete");
+			doneSave();
+			myView.inValid();
+			}
 			}
 		});
 		editText.setOnEditorActionListener(new OnEditorActionListener() {
@@ -339,16 +342,19 @@ public class QRMap extends Activity implements OnTouchListener {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(Constants.inOperation||Constants.inDelOperation){
-					
+					Toast.makeText(getApplicationContext(), "wait i am working",Toast.LENGTH_SHORT).show();
 					return ;
 				}
 				Constants.inOperation = true;	
 				newpoint = getPinpoint();
 				
-			//	System.out.println(newpoint);
+				System.out.println(newpoint);
 				if ((newpoint != null) && (changed == false)) {
 					//Toast.makeText(getApplicationContext(), newpoint.getText(),Toast.LENGTH_SHORT).show();
-					System.out.println(button.getText());
+					if(Constants.pointFlag)					
+						delbtn.setText("Cancel");	
+					else
+						delbtn.setText("Delete");
 					button.setText("cancel");
 					editText.bringToFront();
 					editText.setText(newpoint.getText());
@@ -382,12 +388,14 @@ public class QRMap extends Activity implements OnTouchListener {
 					exist = false;
 					if(Constants.pointFlag){
 				//	Constants.QRid=1;
-						
+					delbtn.setText("Cancel");	
 					pinpoint = new Pinpoint(XposiTion, YposiTion, "stamText",
 							myView.maxW, myView.maxH, myView.orientation,
 							Constants.QRid, Constants.parseNumber);
 					myView.addPinpoint(pinpoint);
-					
+					Constants.pinpoint = new Pinpoint(pinpoint); 
+					System.out.println(Constants.pinpoint);
+					Constants.endInserting = true;
 					Constants.pointFlag=false;
 					}else{
 						myView.inValid();
@@ -395,7 +403,7 @@ public class QRMap extends Activity implements OnTouchListener {
 					}
 				} else {
 					exist = true;
-					delbtn.setText("cancel");
+					delbtn.setText("Delete");
 					editText.setText(newpoint.getText());
 				}
 				
@@ -498,7 +506,7 @@ public class QRMap extends Activity implements OnTouchListener {
 								 int i = dB.getQRPosition(object.getInt("QRid"));
 								 if(i != -1){
 									 myView.changeColor(i);
-									 myView.inValid();
+									 
 								 	}
 							 	   }						
 							 	
@@ -507,7 +515,7 @@ public class QRMap extends Activity implements OnTouchListener {
 						    	Constants.pointFlag =true;
 						    	Toast.makeText(QRMap.this, "point your position", Toast.LENGTH_LONG).show();
 						    }  
-						 
+						 myView.inValid();
 						 }
 					
 					});					
@@ -525,9 +533,10 @@ public class QRMap extends Activity implements OnTouchListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+		Constants.endInserting = false;
 		if(myView != null)
 			myView.inValid();
+					 			
 		sharedPref.edit().putBoolean("notfirstTime", true).commit();
 		
 	}
@@ -637,7 +646,8 @@ public class QRMap extends Activity implements OnTouchListener {
 
 			}
 			myView.bringToFront();
-		}		
+		}
+			
 		imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 		changed = false;
 		

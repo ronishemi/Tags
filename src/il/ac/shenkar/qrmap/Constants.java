@@ -14,6 +14,8 @@ public class Constants {
      public static boolean signInPage = false;
      public static boolean inOperation = false;
      public static boolean inDelOperation = false;
+     public static boolean endInserting = true;
+     public static Pinpoint pinpoint;
      public static String username;
      public static Integer QRid=0;
      public static String parseNumber="";

@@ -19,7 +19,7 @@ import android.view.View;
 public class MyView extends View {
 	private Bitmap pinpoint;										//point on map
 	private Bitmap pinpoint_red;										//point on map
-	private ArrayList<Pinpoint> points = new ArrayList<Pinpoint>();	//list of points
+	private ArrayList<Pinpoint> points;	//list of points
 	private Drawable mCustomImage;									//image
 	public float maxW;
 	public float maxH;
@@ -30,6 +30,7 @@ public class MyView extends View {
 	//Draw pinpoint and map
 	public MyView(Context context) {
 		super(context);
+		points = new ArrayList<Pinpoint>();
 		pinpoint = BitmapFactory.decodeResource(getResources(),
 				R.drawable.pinpoint);
 		pinpoint_red = BitmapFactory.decodeResource(getResources(),
@@ -42,11 +43,11 @@ public class MyView extends View {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		// TODO Auto-generated method stub
-		super.onSizeChanged(w, h, oldw, oldh);
+		super.onSizeChanged(w, h, oldw, oldh);		
 		
 		this.maxW=w;		
 		this.maxH=h;
-				
+		System.out.println("points size "+points.size());
 	}
 
 	@SuppressLint("DrawAllocation")
@@ -87,12 +88,14 @@ public class MyView extends View {
 
 		points.add(new Pinpoint(pinpoint.getxPos(), pinpoint.getyPos(),
 				pinpoint.getText(),pinpoint.getMaxW(),pinpoint.getMaxH(),pinpoint.getOrientation(),pinpoint.getIdQR(),pinpoint.getParseId()));
+		
 	}
 	//Delete point from canvas
 
 	public void delPinpoint(int index) {
-		System.out.println(points.size());
+		
 		points.remove(index);
+		inValid();
 	}
 	public void delLastPinpoint() {
 		points.remove(points.size()-1);
